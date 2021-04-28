@@ -7,17 +7,17 @@
         <title>Dev Finanças</title>
         <link rel="stylesheet" href="./style.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;700&display=swap" rel="stylesheet">
  
     </head>
 
     <body>
 
         <header>
-            <h1 id="logo">dev.finance$</h1>
+            <h1 id="logo">Dev Finanças</h1>
         </header>
 
-        <main>
+        <main class="container">
             <section id="balance" >
                 <h2>Balanço</h2>
 
@@ -32,7 +32,7 @@
 
                 </div>
 
-                <div class="card">
+                <div class="card total">
                     <h3>Total</h3>
                     <p>R$ 2.000,00</p>
                 </div>
@@ -52,34 +52,28 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Luz</td>
-                            <td>- R$ 500,00</td>
-                            <td>23/04/2021</td>
+                            <td class="description">Luz</td>
+                            <td class="expense">- R$ 500,00</td>
+                            <td class="date">23/04/2021</td>
                         </tr>
 
                         <tr>
-                            <td>Água</td>
-                            <td>- R$ 300,00</td>
-                            <td>23/04/2021</td>
+                            <td class="description">Água</td>
+                            <td class="income">- R$ 300,00</td>
+                            <td class="date">23/04/2021</td>
                         </tr>
 
                         <tr>
-                            <td>Internet</td>
-                            <td>- R$ 400,00</td>
-                            <td>25/04/2021</td>
-                        </tr>
-
-                        <tr>
-                            <td>Cartão de Crédito</td>
-                            <td>- R$ 800,00</td>
-                            <td>28/04/2021</td>
+                            <td class="description">Internet</td>
+                            <td class="expense">R$ 400,00</td>
+                            <td class="date">25/04/2021</td>
                         </tr>
                     </tbody>
                 </table>
             </section>
         </main>
 
-        <footer>
+        <footer class="footer">
             <p>Dev-Finanças</p> 
         </footer>
     </body>

@@ -89,7 +89,7 @@
             </section>
         </main>
 
-        <div class="modal-overlay active">
+        <div class="modal-overlay">
             <div class="modal">
 
                     <div id="form">
@@ -108,7 +108,25 @@
                                     name="amount" 
                                     id="amount" 
                                     placeholder="Valor">
+                                <small class="help">
+                                    Use o sinal - (negativo) para despesas e , (virgula) para casas decimais 
+                                </small>
                             </div>
+
+                            <div class="input-group">
+                                <label class="sr-only" for="date">Data</label>
+                                <input 
+                                    type="date" 
+                                    name="date" 
+                                    id="date" 
+                                    placeholder="Data">
+                            </div>
+
+                            <div class="input-group actions">
+                                <a href="#" class="button cancel">Cancelar</a>
+                                <button>Salvar</button>
+                            </div>
+    
 
                         </form>
                     </div>

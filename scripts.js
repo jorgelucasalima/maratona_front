@@ -16,7 +16,7 @@ const Modal = {
     }
 }
 
-const transaction = [
+const transactions = [
     {
         id: 1,
         description: 'Cartão de Crédito',
@@ -27,7 +27,7 @@ const transaction = [
     {
         id: 2,
         description: 'Internet',
-        amount: 50000,
+        amount: -50000,
         date: '26/01/2021',
     },
 
@@ -43,57 +43,86 @@ const transaction = [
 
 const Transaction = {
     incomes() {
-        //somar as entradas
+        return "cheguei"
     },
 
     expenses() {
-        //somar as saidas
+        return "aqui"
     },
 
 
     total() {
-        //Total = incomes - expenses    
+        return "total"    
     }
     
 }
 
-
 const DOM = {
-    transactionContainer: document.querySelector('#data-table tbody'),
+
+    transactionsContainer : document.querySelector('#data-table tbody'),
 
     addTransaction(transaction, index) {
-        const tr = document.createElement('tr');
+        const tr = document.createElement('tr')
         tr.innerHTML = DOM.innerHTMLTransaction(transaction)
-        DOM.transactionContainer.appendChild(tr)
-    
+
+        DOM.transactionsContainer.appendChild(tr)
+
     },
 
-    innerHTMLTransaction(transaction){
 
+    innerHTMLTransaction (transaction) {
         const CSSclass = transaction.amount > 0 ? 'income' : 'expense'
 
-        const amount = transaction.amount
+        const amount = Utils.formatCurrency(transaction.amount)
 
-        const html = `
-                <td class="description">${transaction.description}</td>
-                <td class="${CSSclass}">${transaction.amount}</td>
-                <td class="date">${transaction.date}</td>
-                <td><img src="./assets/minus.svg" alt="Remover dado"></td>
-            
-                `
+        const html = 
+        `    
+        <td class="description">${transaction.description}</td>
+        <td class="${CSSclass}">${amount}</td>
+        <td class="date">${transaction.date}</td>
+        <td>
+            <img src="./assets/minus.svg" alt="Remover dado">
+        </td>
+        `
         return html
+    },
+
+    updateBalance() {
+        document
+            .getElementById('incomeDisplay')
+            .innerHTML = Transaction.incomes()
+   
+        document
+            .getElementById('expenseDisplay')
+            .innerHTML = Transaction.expenses()
+
+        document
+            .getElementById('totalDisplay')
+            .innerHTML = Transaction.total()
     }
+
+
 }
 
 
 const Utils = {
-    formartCurrency(value) {
-        const signal = Number(value) < 0 ? '-' : ''
+    formatCurrency(value) {
+        const sinal = Number(value) < 0 ? '-' : ''
+        value = String(value).replace(/\D/g, '')
+        value = Number(value) / 100
+        value = value.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+        })
+
+        return sinal + value
     }
 }
 
 
-
-transaction.forEach(function(transaction) {
+transactions.forEach(function(transaction) {
     DOM.addTransaction(transaction)
 })
+
+
+DOM.updateBalance()

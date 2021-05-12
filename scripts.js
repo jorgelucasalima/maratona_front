@@ -43,16 +43,31 @@ const transactions = [
 
 const Transaction = {
     incomes() {
-        return "cheguei"
+        let income = 0;
+        
+        transactions.forEach(transaction => {
+            if(transaction.amount > 0) {
+                income += transaction.amount;
+            }
+        })
+
+        return income;
     },
 
     expenses() {
-        return "aqui"
+        let expense = 0;
+        
+        transactions.forEach(transaction => {
+            if(transaction.amount < 0) {
+                expense += transaction.amount;
+            }
+        })
+
+        return expense;
     },
 
-
     total() {
-        return "total"    
+        return Transaction.incomes() + Transaction.expenses();
     }
     
 }
@@ -90,15 +105,15 @@ const DOM = {
     updateBalance() {
         document
             .getElementById('incomeDisplay')
-            .innerHTML = Transaction.incomes()
+            .innerHTML = Utils.formatCurrency(Transaction.incomes())
    
         document
             .getElementById('expenseDisplay')
-            .innerHTML = Transaction.expenses()
+            .innerHTML = Utils.formatCurrency(Transaction.expenses())
 
         document
             .getElementById('totalDisplay')
-            .innerHTML = Transaction.total()
+            .innerHTML = Utils.formatCurrency(Transaction.total())
     }
 
 

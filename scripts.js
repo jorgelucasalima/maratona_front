@@ -40,12 +40,25 @@ const transactions = [
 
 ]
 
-
 const Transaction = {
+    all:transactions,
+
+    add(transaction){
+        Transaction.all.push(transaction)
+
+        App.reload()
+    },
+
+    remove(index){
+        Transaction.all.splice(index, 1)
+
+        App.reload()
+    },
+
     incomes() {
         let income = 0;
         
-        transactions.forEach(transaction => {
+        Transaction.all.forEach(transaction => {
             if(transaction.amount > 0) {
                 income += transaction.amount;
             }
@@ -57,7 +70,7 @@ const Transaction = {
     expenses() {
         let expense = 0;
         
-        transactions.forEach(transaction => {
+        Transaction.all.forEach(transaction => {
             if(transaction.amount < 0) {
                 expense += transaction.amount;
             }
@@ -114,11 +127,14 @@ const DOM = {
         document
             .getElementById('totalDisplay')
             .innerHTML = Utils.formatCurrency(Transaction.total())
+    },
+
+    clearTransactions() {
+        DOM.transactionsContainer.innerHTML = ""
     }
 
 
 }
-
 
 const Utils = {
     formatCurrency(value) {
@@ -134,10 +150,64 @@ const Utils = {
     }
 }
 
+const Form = {
+    description: document.querySelector('input#description'),
+    amount: document.querySelector('input#amount'),
+    date: document.querySelector('input#date'),
 
-transactions.forEach(function(transaction) {
-    DOM.addTransaction(transaction)
-})
+    getValues() {
+
+        return{
+            description: Form.description.value,
+            amount: Form.amount.value,
+            date: Form.date.value,
+        }
+    },
+
+    formatData(){
+        console.log('formatar os dados')
+    },
+
+    validateFields(){
+        const {description, amount, date} = Form.getValues()
+        if (description.trim() === '' || amount.trim() === '' || date.trim() === '') {
+            throw new Error("Você esqueceu de preencher algum campo !")
+        }
+    },
+
+    submit(event){
+        event.preventDefault()
+
+        try {
+            Form.validateFields()
+
+        } catch (error) {
+            alert(error.message)
+        }
 
 
-DOM.updateBalance()
+        
+        Form.formatData()
+
+    },
+}
+
+const App = {
+    init() {
+
+        Transaction.all.forEach(transaction => {
+            DOM.addTransaction(transaction)
+        })
+        
+        
+        DOM.updateBalance()
+
+    },
+
+    reload() {
+        DOM.clearTransactions()
+        App.init()
+    },
+}
+
+App.init()

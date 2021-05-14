@@ -137,6 +137,11 @@ const DOM = {
 }
 
 const Utils = {
+    formatAmount(value){
+        console.log(value)
+    },
+
+
     formatCurrency(value) {
         const sinal = Number(value) < 0 ? '-' : ''
         value = String(value).replace(/\D/g, '')
@@ -175,11 +180,17 @@ const Form = {
         }
     },
 
+    formatValues(){
+        let {description, amount, date} = Form.getValues()
+        amount = Utils.formatAmount(amount)
+    },
+
     submit(event){
         event.preventDefault()
 
         try {
             Form.validateFields()
+            Form.formatValues()
 
         } catch (error) {
             alert(error.message)

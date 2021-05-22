@@ -16,32 +16,30 @@ const Modal = {
     }
 }
 
-const transactions = [
-    {
-        id: 1,
-        description: 'Cartão de Crédito',
-        amount: 20000,
-        date: '23/01/2021',
-    },
-
-    {
-        id: 2,
-        description: 'Internet',
-        amount: -50000,
-        date: '26/01/2021',
-    },
-
-    {
-        id: 3,
-        description: 'Luz',
-        amount: -10000,
-        date: '24/01/2021',
-    },
-
-]
 
 const Transaction = {
-    all:transactions,
+    all:[
+            {
+                id: 1,
+                description: 'Cartão de Crédito',
+                amount: 20000,
+                date: '23/01/2021',
+            },
+        
+            {
+                id: 2,
+                description: 'Internet',
+                amount: -50000,
+                date: '26/01/2021',
+            },
+        
+            {
+                id: 3,
+                description: 'Luz',
+                amount: -10000,
+                date: '24/01/2021',
+            },
+        ],
 
     add(transaction){
         Transaction.all.push(transaction)

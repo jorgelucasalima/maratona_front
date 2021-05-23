@@ -16,7 +16,6 @@ const Modal = {
     }
 }
 
-
 const Transaction = {
     all:[
             {
@@ -140,11 +139,9 @@ const Utils = {
         return value
     },
 
-
     formatDate(date){
         const splittedDate = date.split("-")
         return `${splittedDate[2]}/${splittedDate[1]}/${splittedDate[0]}`
-
     },
 
     formatCurrency(value) {
@@ -168,7 +165,6 @@ const Form = {
     date: document.querySelector('input#date'),
 
     getValues() {
-
         return{
             description: Form.description.value,
             amount: Form.amount.value,
@@ -176,13 +172,11 @@ const Form = {
         }
     },
 
-    formatData(){
-        console.log('formatar os dados')
-    },
-
     validateFields(){
         const {description, amount, date} = Form.getValues()
-        if (description.trim() === '' || amount.trim() === '' || date.trim() === '') {
+        if (description.trim() === '' || 
+            amount.trim() === '' || 
+            date.trim() === '') {
             throw new Error("Você esqueceu de preencher algum campo !")
         }
     },
@@ -190,7 +184,7 @@ const Form = {
     formatValues(){
         let {description, amount, date} = Form.getValues()
         amount = Utils.formatAmount(amount)
-        date.Utils.formatDate(date)
+        date = Utils.formatDate(date)
 
         return {
             description,

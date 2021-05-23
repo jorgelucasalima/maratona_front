@@ -19,21 +19,18 @@ const Modal = {
 const Transaction = {
     all:[
             {
-                id: 1,
                 description: 'Cartão de Crédito',
                 amount: 20000,
                 date: '23/01/2021',
             },
         
             {
-                id: 2,
                 description: 'Internet',
                 amount: -50000,
                 date: '26/01/2021',
             },
         
             {
-                id: 3,
                 description: 'Luz',
                 amount: -10000,
                 date: '24/01/2021',
@@ -88,14 +85,14 @@ const DOM = {
 
     addTransaction(transaction, index) {
         const tr = document.createElement('tr')
-        tr.innerHTML = DOM.innerHTMLTransaction(transaction)
-
+        tr.innerHTML = DOM.innerHTMLTransaction(transaction, index)
+        tr.dataset.index = index
         DOM.transactionsContainer.appendChild(tr)
 
     },
 
 
-    innerHTMLTransaction (transaction) {
+    innerHTMLTransaction (transaction, index) {
         const CSSclass = transaction.amount > 0 ? 'income' : 'expense'
 
         const amount = Utils.formatCurrency(transaction.amount)
@@ -106,7 +103,7 @@ const DOM = {
         <td class="${CSSclass}">${amount}</td>
         <td class="date">${transaction.date}</td>
         <td>
-            <img src="./assets/minus.svg" alt="Remover dado">
+            <img onclick="Transaction.remove($(index))" src="./assets/minus.svg" alt="Remover dado">
         </td>
         `
         return html
@@ -194,15 +191,16 @@ const Form = {
 
     },
 
-    saveTransaction() {
-        Transaction.add(transaction)
-    },
-
     clearFields() {
         Form.description.value = ''
         Form.amount.value = ''
         Form.date.value = ''
     },
+
+    saveTransaction() {
+        Transaction.add(transaction)
+    },
+
 
     submit(event){
         event.preventDefault()
@@ -229,11 +227,19 @@ const Form = {
     },
 }
 
+const Storages = {
+    get(){},
+
+    set(transaction){
+
+    },
+}
+
 const App = {
     init() {
 
-        Transaction.all.forEach(transaction => {
-            DOM.addTransaction(transaction)
+        Transaction.all.forEach((transaction, index) => {
+            DOM.addTransaction(transaction, index)
         })
         
         
